@@ -11,6 +11,8 @@ class AppointmentTime(models.Model):
         return str(self.horario)
 
     class Meta:
+        verbose_name = 'Horário'
+        verbose_name_plural = 'Horários'
         db_table = 'appointment_times'
 
 
@@ -30,4 +32,6 @@ class Schedule(models.Model):
         return f'{self.dia} - {self.this_medico()}'
 
     class Meta:
+        verbose_name = 'Agenda'
+        verbose_name_plural = 'Agendas'
         db_table = 'schedules'

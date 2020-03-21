@@ -10,6 +10,8 @@ class Specialty(models.Model):
         return self.nome
 
     class Meta:
+        verbose_name = 'Especialidade'
+        verbose_name_plural = 'Especialidades'
         db_table = 'specialties'
 
 
@@ -30,4 +32,6 @@ class Doctor(models.Model):
         return self.nome
 
     class Meta:
+        verbose_name = 'Médico'
+        verbose_name_plural = 'Médicos'
         db_table = 'doctors'

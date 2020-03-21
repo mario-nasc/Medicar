@@ -1,4 +1,4 @@
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from .models import Doctor, Specialty
 from django.contrib import admin
 
@@ -19,3 +19,4 @@ class DoctorAdmin(admin.ModelAdmin):
 admin.site.register(Specialty, SpecialtyAdmin)
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.unregister(Group)
+admin.site.unregister(User)
