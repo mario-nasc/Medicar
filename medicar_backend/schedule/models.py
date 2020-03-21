@@ -7,6 +7,9 @@ class AppointmentTime(models.Model):
 
     horario = models.TimeField()
 
+    def __str__(self):
+        return str(self.horario)
+
     class Meta:
         db_table = 'appointment_times'
 
@@ -19,6 +22,12 @@ class Schedule(models.Model):
         Doctor, on_delete=models.CASCADE, related_name='doctor_name')
     horarios = models.ManyToManyField(
         AppointmentTime, related_name='appointment_time')
+
+    def this_medico(self):
+        return self.medico.nome
+
+    def __str__(self):
+        return f'{self.dia} - {self.this_medico()}'
 
     class Meta:
         db_table = 'schedules'
