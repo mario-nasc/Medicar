@@ -3,6 +3,8 @@ from .models import Doctor, Specialty
 from django.contrib import admin
 
 admin.site.site_header = 'Medicar - Gerência'
+admin.site.site_title = "Administração do Medicar"
+admin.site.index_title = ""
 
 
 class SpecialtyAdmin(admin.ModelAdmin):
