@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from doctor.api.viewsets import SpecialtyViewSet, DoctorViewSet
+from schedule.api.viewsets import ScheduleViewSet
 from client import urls as client_urls
 from django.urls import path, include
 from rest_framework import routers
@@ -25,7 +26,9 @@ router.register(
 router.register(
     r'doctor', DoctorViewSet, base_name='Doctor'
 )
-
+router.register(
+    r'schedule', ScheduleViewSet, base_name='Schedule'
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/', include(client_urls)),
