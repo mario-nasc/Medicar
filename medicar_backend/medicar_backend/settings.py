@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_filters',
     'doctor',
     'schedule',
-    'client'
+    'client',
+    'appointment'
 ]
 
 MIDDLEWARE = [
