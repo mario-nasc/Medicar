@@ -44,7 +44,6 @@ class AppointmentViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         user_id = self.get_user_id(request)
         request.GET['client'] = user_id
-        print(request.GET)
         return super(AppointmentViewSet, self).list(request, *args, **kwargs)
     
     def create(self, request, *args, **kwargs):
@@ -72,6 +71,11 @@ class AppointmentViewSet(ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         appointment = Appointment.objects.get(id=kwargs['pk'])
+        user_id = self.get_user_id(request)
+
+        if user_id != appointment.client.id or appointment.dia < datetime.now():
+            return Response({'text': "exclusão não permitida"}, status=403)
+
         appointment_time = AppointmentTime.objects.get(
             horario=appointment.horario)
         schedule = Schedule.objects.get(medico=appointment.medico, dia=appointment.dia)

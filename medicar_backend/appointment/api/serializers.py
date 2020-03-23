@@ -1,4 +1,4 @@
-from schedule.api.serializers import ScheduleSerializer
+from doctor.api.serializers import DoctorSerializer
 from appointment.models import Appointment
 from rest_framework import serializers
 
@@ -8,7 +8,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         Model is Appointment.
         Take all the fields.
     """
-    agenda = ScheduleSerializer()
+    medico = DoctorSerializer()
     class Meta:
         model = Appointment
         fields = '__all__'
