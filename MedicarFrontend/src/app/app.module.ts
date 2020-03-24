@@ -5,18 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
+import { RegistrationComponent } from './registration/registration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    HttpModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService, HttpClient, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
