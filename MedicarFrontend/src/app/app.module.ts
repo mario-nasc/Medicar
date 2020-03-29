@@ -9,15 +9,20 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
 import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RegisterappointmentComponent } from './registerappointment/registerappointment.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from "@angular/material/dialog";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RegisterappointmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,10 @@ import { HttpModule } from '@angular/http';
     HttpClientModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    FontAwesomeModule
   ],
   providers: [AuthService, HttpClient, AuthGuard],
   bootstrap: [AppComponent]

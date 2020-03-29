@@ -1,0 +1,41 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.default-value{
+    color: #A8A8A8;
+}
+select {
+    width:400px;
+    height: 40px;
+    margin:10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+#criarConsulta{
+    background-color: #49B4BB;
+    width: 180px;
+    height: 40px;
+    border-color: transparent;
+}
+#criarConsulta:disabled{
+    background-color: gray;
+    width: 180px;
+    height: 40px;
+}
+#cancelRegistration {
+    margin: 5px;
+    color: #49B4BB;
+    background-color: #ffffff;
+    border-style: none;
+    width: 180px;
+    height: 40px;
+}

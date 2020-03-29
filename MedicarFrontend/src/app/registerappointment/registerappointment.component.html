@@ -1,0 +1,26 @@
+<div >
+    <form [formGroup]="registrationForm" (ngSubmit)="registerAppointment()" novalidate>
+        <h1>Nova Consulta</h1>
+        <select name="specialties" id="specialties" formControlName="specialty" (change)="getDoctors()">
+            <option class="default-value" value="" selected>Especialidade</option>
+            <option *ngFor="let specialty of specialties" [ngValue]=specialty.id>{{specialty.nome}}</option>
+        </select>
+        <select [attr.disabled]="!registrationForm.controls.specialty.valid ? '' : null" name="doctors" id="doctors" formControlName="doctor" (change)="getSchedules()">
+            <option class="default-value" value="" selected>Médico</option>
+            <option *ngFor="let doctor of doctors" [ngValue]=doctor.id>{{doctor.nome}}</option>
+        </select>
+        <select [attr.disabled]="!registrationForm.controls.doctor.valid ? '' : null" name="dates" id="dates" formControlName="date">
+            <option class="default-value" value="" selected>Data</option>
+            <option *ngFor="let schedule of schedules" [ngValue]=schedule.id>{{schedule.dia}}</option>
+        </select>
+        <select [attr.disabled]="!registrationForm.controls.date.valid ? '' : null" name="hours" id="hours" formControlName="hour">
+            <option class="default-value" value="" selected>Hora</option>
+            <option *ngFor="let hour of hours.get(registrationForm.controls.date.value)" [ngValue]=hour>{{hour}}</option>
+        </select>
+
+        <div class='buttons'>
+            <a class="btn btn-primary" href="" class="btn btn-primary" id="cancelRegistration">Cancelar</a>
+            <button [disabled]="!registrationForm.valid" type="submit" class="btn btn-primary" id="criarConsulta">Confirmar</button>
+        </div>
+    </form>
+</div>
