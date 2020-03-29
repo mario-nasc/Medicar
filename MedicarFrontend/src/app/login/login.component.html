@@ -11,6 +11,7 @@
             <input class="form_input" type="password" id="password" placeholder="Senha">
             <span id="icon_password" (click)="showPassword()" toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
         </div>
+        <small hidden class="form-text text-danger" id="hiddenMessage">usuário ou senha incorreta</small>
         <div class="form-group form-check" id="checkbox">
             <label class="form-check-label">
             <input class="form-check-input" type="checkbox" id="rememberme"> lembrar minha senha

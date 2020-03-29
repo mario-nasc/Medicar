@@ -60,7 +60,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate([''])
           this.Auth.setLoggedIn(true)
       },
-      (data) => {
+      (data: any) => {
+        let alert = (<HTMLInputElement>document.getElementById("hiddenMessage"))
+        alert.hidden = false
         console.log('error', data.status)
       }
     )
