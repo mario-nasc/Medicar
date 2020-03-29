@@ -17,15 +17,15 @@ import { SpecialtyService } from '../specialty.service';
 export class HomeComponent implements OnInit {
   faPlus = faPlus
   faTimes = faTimes
-  public appointments: Array<any>
   public user: User
-    constructor(
-      private auth: AuthService,
-      private appointment: Appointment,
-      private specialty: SpecialtyService,
-      private route: Router,
-      public dialog: MatDialog,
-      public specialties: Map<string,string>
+  public appointments: Array<any>
+  constructor(
+    private auth: AuthService,
+    private appointment: Appointment,
+    private specialty: SpecialtyService,
+    private route: Router,
+    public dialog: MatDialog,
+    public specialties: Map<string,string>
   ){}
 
   ngOnInit(): void {
@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
         response.forEach(element => {
           this.specialties.set(element.id, element.nome)
         });
-        this.appointments = response
       },
       (error: any) => console.log('deu errado')
     )
@@ -44,15 +43,29 @@ export class HomeComponent implements OnInit {
     .subscribe(
       (response: any) => {
         this.appointments = response
+        this.formatDate(this.appointments)
       },
       (error: any) => console.log('deu errado')
     )
-    // this.user.
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterappointmentComponent,{
-      width: '480px', height: '420px', disableClose: true 
+      width: '480px', height: '420px'
   });
+  }
+  appendLeadingZeroes(n){
+    if(n <= 9){
+      return "0" + n;
+    }
+    return n
+  }
+
+  formatDate(appointments: Array<any>): void {
+    console.log(appointments)
+    appointments.forEach(element => {
+      let dia = new Date(element.dia)
+      element.dia =  this.appendLeadingZeroes(dia.getDate()) + '-' + this.appendLeadingZeroes(dia.getMonth() + 1) + "-" + dia.getFullYear()
+    });
   }
   logout(): void {
     this.auth.setLoggedIn(false)

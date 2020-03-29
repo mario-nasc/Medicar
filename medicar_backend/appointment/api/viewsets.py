@@ -2,7 +2,6 @@ from .serializers import AppointmentSerializer, CreateAppointmentSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from schedule.models import Schedule, AppointmentTime
-from doctor.api.serializers import DoctorSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.viewsets import ModelViewSet
 from django.forms.models import model_to_dict
@@ -42,12 +41,10 @@ class AppointmentViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         user_id = self.get_user_id(request)
-        print(user_id)
         request.GET['client'] = user_id
         return super(AppointmentViewSet, self).list(request, *args, **kwargs)
     
     def create(self, request, *args, **kwargs):
-        print(request.data)
         hour_id = AppointmentTime.objects.get(horario=request.data['horario']).id
         schedule = Schedule.objects.get(id=request.data['agenda_id'])
         schedule.horarios.remove(hour_id)
