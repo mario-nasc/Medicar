@@ -96,10 +96,10 @@ WSGI_APPLICATION = 'medicar_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'medicar',
-        'USER': 'medicar_admin',
-        'PASSWORD': 'medicar123',
-        'HOST': 'localhost',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -137,6 +137,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+ALLOWED_HOSTS = ["*"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
