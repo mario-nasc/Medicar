@@ -1,1 +1,39 @@
-<p>home works!</p>
+<div id="container">
+    <header>
+            <div class="logo">
+                <img src="../../assets/logo.jpeg" alt="logo">
+                <h3>Medicar</h3>
+            </div>
+            <div class="right_buttons">
+                <div class="username"> {{ user.username }}</div>
+                <button class="logout" (click)="logout()">Desconectar</button>
+            </div>
+    </header>
+    <main>
+        <div class="Table-head">
+            <h2> Consulta Médica</h2>
+            <button class="marcarConsulta" (click)="openDialog()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Marcar Consulta
+            </button>
+        </div>
+        <table>
+            <tr class="tr_header">
+                <th>ESPECIALIDADE</th>
+                <th>PROFISSIONAL</th>
+                <th>DATA</th>
+                <th>HORA</th>
+            </tr>
+            <tr *ngFor="let appointment of appointments; let td_index=index;">
+                <td>{{specialties.get(appointment.medico.especialidade)}}</td>
+                <td>{{appointment.medico.nome}}</td>
+                <td>{{appointment.dia}}</td>
+                <td>{{appointment.horario}}</td>
+                <td><button (click)="Delete(appointment.id, td_index)"class="desmarcarButton">
+                    <fa-icon class="desmarcarIcon" [icon]="faTimes"></fa-icon>
+                    Deletar
+                </button></td>
+            </tr>
+        </table>
+    </main>
+</div>
