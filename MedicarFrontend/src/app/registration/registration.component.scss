@@ -41,6 +41,15 @@ button#submit {
     color: #49B4BB
 }
 
+button#submit:disabled {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    color: gray;
+}
+
 ::placeholder {
     font-family: Roboto;
     font-style: normal;
@@ -58,13 +67,19 @@ button#submit {
 .btn-primary {
     border-color: transparent;
 }
-
+.btn-primary {
+    border-color: transparent;
+}
 #criarUser{
     background-color: #49B4BB;
     width: 180px;
     height: 40px;
 }
-
+#criarUser:disabled{
+    background-color: gray;
+    width: 180px;
+    height: 40px;
+}
 #checkbox {
     font-size: 14px;
     color:  #A8A8A8;
@@ -116,12 +131,4 @@ input.ng-invalid.ng-touched {
 
 select.ng-invalid.ng-touched {
     border: 1px solid red;
-}
-
-input.ng-valid.ng-touched {
-    border: 1px solid green;
-}
-
-select.ng-valid.ng-touched {
-    border: 1px solid green;
 }

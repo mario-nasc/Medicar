@@ -1,19 +1,16 @@
 <div class='container'>
-    <form #registration="ngForm"  (ngSubmit)="registerUser()">
+    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()" novalidate>
         <h1>Crie sua conta</h1>
         <div class="form-group">
-            <input 
+            <input
                 class="form_input"
                 type="text"
                 id="insertName"
                 placeholder="Nome"
                 name="name"
-                required
-                minlength="5"
-                ngModel
-                #inputName="ngModel"
+                formControlName="name"
             >
-            <small *ngIf="inputName.value!=''&&inputName.invalid" class="form-text text-danger">Nome inválido</small>
+            <small *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched" class="form-text text-danger">nome inválido, quantidade mínima de caracteres igual à 6</small>
         </div>
         <div class="form-group">
             <input
@@ -22,13 +19,9 @@
                 id="insertEmail"
                 placeholder="Email"
                 name="email"
-                required
-                minlength="10"
-                ngModel
-                #inputEmail="ngModel"
+                formControlName="email"
             >
-            <small *ngIf="inputEmail.value!=''&&inputEmail.invalid" class="form-text text-danger">Email inválido</small>
-
+            <small *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched" class="form-text text-danger">formato de email inválido</small>
         </div>
         <div class="form-group">
             <input
@@ -37,13 +30,10 @@
                 id="insertPassword"
                 name="password"
                 placeholder="Senha"
-                required
-                minlength="6"
-                ngModel
-                #inputPassword="ngModel"
+                formControlName="password"
             >
-            <span (click)="showPassword()" toggle="#insertPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-            <small *ngIf="inputPassword.value!=''&&inputPassword.invalid" class="form-text text-danger">Senha inválido</small>
+            <span id="passwordIcon" (click)="showPassword()" toggle="#insertPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            <small *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched" class="form-text text-danger">nome inválido, quantidade mínima de caracteres igual à 8</small>
         </div>
         <div class="form-group">
              <input
@@ -52,17 +42,14 @@
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder="Confirmar Senha"
-                required
-                minlength="6"
-                ngModel
-                #inputConfirmPassword="ngModel"
+                formControlName="confirm_password"
             >
-            <span (click)="showConfirmPassword()" toggle="#confirmPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-            <small *ngIf="inputConfirmPassword.value!=inputPassword.value" class="form-text text-danger">As senhas estão diferentes</small>
+            <span id ="confirmPasswordIcon" (click)="showConfirmPassword()" toggle="#confirmPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            <small *ngIf="registrationForm.get('confirm_password').invalid && registrationForm.get('confirm_password').touched" class="form-text text-danger">as senha não são iguais</small>
         </div>
         <div class='buttons'>
             <a class="btn btn-primary" href="/login" class="btn btn-primary" id="cancelRegistration">Cancelar</a>
-            <button type="submit" class="btn btn-primary" id="criarUser">Confirmar</button>
+            <button [disabled]="!registrationForm.valid" type="submit" class="btn btn-primary" id="criarUser">Confirmar</button>
         </div>
     </form>
 </div>
