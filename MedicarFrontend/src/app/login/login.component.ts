@@ -25,11 +25,14 @@ export class LoginComponent implements OnInit {
   }
 
   showPassword() {
-    var field = (<HTMLInputElement>document.getElementById("password"))
+    let field = (<HTMLInputElement>document.getElementById("password"))
+    let icon = (<HTMLInputElement>document.getElementById("icon_password"))
     if (field.type === "password") {
       field.type = "text";
+      icon.className = 'fa fa-fw fa-eye-slash field-icon toggle-password';
     } else {
       field.type = "password";
+      icon.className = 'fa fa-fw fa-eye field-icon toggle-password';
     }
   }
 
@@ -46,12 +49,14 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('username', username);
     }else{
       localStorage.removeItem('rememberMe');
-      localStorage.removeItem('username');
+      localStorage.removeItem('userid');
+      localStorage.removeItem('token')
     }
 
     // if auth go to home else stay in this view
     this.Auth.getUserDetails(username, password).subscribe(
-      (data) => {
+      (data: any) => {
+          this.Auth.setUser(data.user_id, data.token, data.username)
           this.router.navigate([''])
           this.Auth.setLoggedIn(true)
       },
