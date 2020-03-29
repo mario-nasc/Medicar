@@ -28,7 +28,8 @@ def mylogin(request):
         return Response({
             'text':'login efetuado com sucesso',
             'token': str(token),
-            'user_id': user.id},
+            'user_id': user.id,
+            'username': user.username},
             status=200)
     else:
         return Response(

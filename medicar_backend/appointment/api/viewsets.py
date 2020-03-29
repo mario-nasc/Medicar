@@ -9,7 +9,7 @@ from django.forms.models import model_to_dict
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from appointment.models import Appointment
-from datetime import datetime
+from datetime import datetime, date
 
 class AppointmentViewSet(ModelViewSet):
     """Specialty ViewSet
@@ -20,9 +20,8 @@ class AppointmentViewSet(ModelViewSet):
         alter, or delete any database data.
     """
     queryset = Appointment.objects.order_by(
-            'dia', 'horario').exclude(dia__lt=datetime.now()).exclude(
-                horario__lt=datetime.now())
-
+            'dia', 'horario').exclude(dia__lt=datetime.now(),).exclude(
+                horario__lt=datetime.now(), dia=date.today())
     serializer_class = AppointmentSerializer
     permission_classes = (IsAuthenticated, )
     filter_backends = [DjangoFilterBackend]
@@ -43,10 +42,12 @@ class AppointmentViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         user_id = self.get_user_id(request)
+        print(user_id)
         request.GET['client'] = user_id
         return super(AppointmentViewSet, self).list(request, *args, **kwargs)
     
     def create(self, request, *args, **kwargs):
+        print(request.data)
         hour_id = AppointmentTime.objects.get(horario=request.data['horario']).id
         schedule = Schedule.objects.get(id=request.data['agenda_id'])
         schedule.horarios.remove(hour_id)
@@ -72,8 +73,7 @@ class AppointmentViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         appointment = Appointment.objects.get(id=kwargs['pk'])
         user_id = self.get_user_id(request)
-
-        if user_id != appointment.client.id or appointment.dia < datetime.now():
+        if user_id != appointment.client.id or appointment.dia < date.today():
             return Response({'text': "exclusão não permitida"}, status=403)
 
         appointment_time = AppointmentTime.objects.get(
